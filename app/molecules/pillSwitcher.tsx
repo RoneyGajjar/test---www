@@ -9,7 +9,7 @@ export const PillSwitcher = () => {
 
     return (
 
-        <div className="w-full inline-flex justify-center items-center mx-auto max-w-130 bg-[#EEEEEE] rounded-full md:-mt-13 shadow-sm">
+        <div className="w-fit inline-flex justify-center items-center mx-auto max-w-130 bg-[#EEEEEE] rounded-full md:-mt-13 shadow-sm">
             {TABS.map((tab) => (
                 <button
                     key={tab}

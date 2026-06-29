@@ -1,11 +1,3 @@
-// import { HTMLSectionElement, ReactNode, SectionHTMLAttributes } from 'react'
-
-// interface SectionProps extends SectionHTMLAttributes<HTMLSectionElement> {
-//     children: ReactNode;
-//     className?: string;
-// }
-
-
 const Section = ({ children, className }: { children: React.ReactNode, className?: string }) => {
     return (
         <section className={`w-full mx-auto max-w-[var(--container-width)] p-2 md:p-0 ${className}`}>
@@ -16,4 +8,4 @@ const Section = ({ children, className }: { children: React.ReactNode, className
     )
 }
 
-export default Section
+export default Section;
