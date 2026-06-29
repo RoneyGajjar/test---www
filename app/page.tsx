@@ -27,10 +27,11 @@
 //   );
 // }
 
-
+export const revalidate = 60; // Revalidates the cache every 60 seconds
 
 import { client } from '../sanity/lib/client';
 import { PageBuilder } from '../app/templates/pageBuilder';
+
 
 const PAGE_QUERY = `
   *[_type == "page" && slug.current == "hompage"][0] {
