@@ -12,6 +12,7 @@ type AdvancedTextProps = {
         color?: string;
         textAlign?: string;
         margin?: { top?: string; bottom?: string; left?: string; right?: string };
+        padding?: { top?: string; bottom?: string; left?: string; right?: string };
         animateText?: boolean;
         dynamicStyle?: boolean;
     };
@@ -38,7 +39,12 @@ export function AdvancedTextBlock({ text, config }: AdvancedTextProps) {
         config?.margin?.top,
         config?.margin?.bottom,
         config?.margin?.left,
-        config?.margin?.right
+        config?.margin?.right,
+
+        config?.padding?.top,
+        config?.padding?.bottom,
+        config?.padding?.left,
+        config?.padding?.right
     ].filter(Boolean).join(' ');
 
     // 3. Text Classes (Style: Width, Color, Alignment, Size)

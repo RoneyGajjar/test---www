@@ -3,7 +3,7 @@ import { AdvancedTextBlock } from './advancedTextBlock';
 
 export function IntegrationCTA({ title, subtitle, iconUrl, buttons }: any) {
     return (
-        <section className="px-6 mt-16">
+        <section className="px-6">
             <div className="bg-[#6366f1] rounded-[2rem] p-10 md:p-16 flex flex-col md:flex-row items-center gap-8 md:gap-12 text-white">
 
                 {/* Icon */}

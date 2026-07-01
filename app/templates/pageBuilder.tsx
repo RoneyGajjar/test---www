@@ -4,13 +4,15 @@ import { AdvancedTextBlock } from '../organisms/advancedTextBlock';
 import { FeaturedBanner } from '../organisms/featuredBanner';
 import { IntegrationDirectory } from '../organisms/integrationDirectory';
 import { IntegrationCTA } from '../organisms/integrationCTA';
+import { LogoStrip } from '../organisms/logoStrip'; // Assuming you have this
 
 const blockComponents = {
     hero: Hero,
     advancedText: AdvancedTextBlock,
     featuredBanner: FeaturedBanner,
     integrationDirectory: IntegrationDirectory,
-    integrationCTA: IntegrationCTA
+    integrationCTA: IntegrationCTA,
+    logoStrip: LogoStrip
 };
 
 type Block = { _key: string; _type: string;[key: string]: any };
@@ -22,10 +24,12 @@ export function PageBuilder({ blocks }: { blocks: Block[] }) {
         <div className="flex flex-col gap-y-24 py-24">
             {blocks.map((block) => {
                 const Component = blockComponents[block._type as keyof typeof blockComponents] as React.ElementType;
+
                 if (!Component) {
                     console.warn(`Missing mapped component for: ${block._type}`);
                     return null;
                 }
+
                 return <Component key={block._key} {...block} />;
             })}
         </div>

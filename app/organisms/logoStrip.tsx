@@ -12,28 +12,31 @@ export function LogoStrip({ apps }: LogoStripProps) {
     if (!apps || apps.length === 0) return null;
 
     return (
-        <section className="container mx-auto px-6 py-12">
-            <div className="flex items-center justify-center gap-[1vw]">
+        <section className="w-full">
+            <div className="flex flex-wrap items-center justify-center gap-8">
                 {apps.map((app, i) => (
                     <div
                         key={i}
                         className={`
-                            relative flex items-center justify-center aspect-square w-20 md:w-24 
-                            rounded-[22%] 
-                            ${app.bgClass}
+                            relative flex items-center justify-center 
+                            w-70 h-70 md:w-70 md:h-70 
+                            rounded-[2rem] 
                             ${app.hasInnerShadow
-                                ? 'shadow-[inset_0px_2px_10px_rgba(255,255,255,0.35)]'
-                                : 'shadow-sm border border-gray-100'
+                                ? 'shadow-[inset_0px_4px_20px_rgba(255,255,255,0.4)]'
+                                : 'shadow-xl'
                             }
                         `}
+                        style={{ backgroundColor: app.bgClass }}
+
                     >
-                        <div className="relative w-[50%] h-[50%]">
+                        {/* INCREASED SIZE: w-[70%] h-[70%] for a massive logo feel */}
+                        <div className="relative w-[70%] h-[70%]">
                             <Image
                                 src={app.logo}
                                 alt={`App logo ${i}`}
                                 fill
-                                sizes="100px"
-                                className="object-contain drop-shadow-sm"
+                                sizes="160px"
+                                className="object-contain"
                             />
                         </div>
                     </div>

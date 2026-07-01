@@ -23,6 +23,8 @@ export default defineType({
                 { type: 'integrationDirectory' },
                 { type: 'integrationCTA' },
                 { type: 'logoStrip' },
+                { type: 'navbar' },
+                { type: 'footer' },
 
             ],
         }),

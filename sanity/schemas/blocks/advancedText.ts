@@ -1,5 +1,16 @@
 import { defineField, defineType } from 'sanity';
 
+const spacingOptions = [
+    { title: '0', value: 'p-0' },
+    { title: '4', value: 'p-4' },
+    { title: '8', value: 'p-8' },
+    { title: '12', value: 'p-12' },
+    { title: '16', value: 'p-16' },
+    { title: '24', value: 'p-24' },
+    { title: '32', value: 'p-32' },
+];
+
+
 export default defineType({
     name: 'advancedText',
     title: 'Advanced Text Block',
@@ -159,6 +170,19 @@ export default defineType({
                             type: 'string',
                             options: { list: [{ title: '0', value: 'mr-0' }, { title: '4', value: 'mr-4' }, { title: '8', value: 'mr-8' }, { title: '12', value: 'mr-12' }, { title: '16', value: 'mr-16' }, { title: '24', value: 'mr-24' }, { title: '32', value: 'mr-32' }] },
                         }),
+                    ],
+                }),
+                defineField({
+                    name: 'padding',
+                    title: 'Padding',
+                    type: 'object',
+                    fieldset: 'row2',
+                    options: { columns: 2 },
+                    fields: [
+                        { name: 'top', type: 'string', title: 'Padding Top (e.g., pt-4)', options: { list: spacingOptions } },
+                        { name: 'bottom', type: 'string', title: 'Padding Bottom (e.g., pb-4)', options: { list: spacingOptions } },
+                        { name: 'left', type: 'string', title: 'Padding Left (e.g., pl-4)', options: { list: spacingOptions } },
+                        { name: 'right', type: 'string', title: 'Padding Right (e.g., pr-4)', options: { list: spacingOptions } },
                     ],
                 }),
             ]

@@ -1,82 +1,62 @@
-// components/organisms/Footer.tsx
-"use client"
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ChevronDown } from 'lucide-react'; // Only keeping the UI icon from Lucide
 
-const FOOTER_LINKS = {
-    col1: [
-        {
-            title: 'Computer',
-            links: ['Meet Computer', 'How Computer works', 'Agent Studio'],
-        },
-        {
-            title: 'Computer+ Apps',
-            links: ['Support App', 'Build App', 'Observe App'],
-        },
-        {
-            title: 'Use Cases',
-            links: [
-                'Service desk automation',
-                'Support teams',
-                'Operations teams',
-                'Customer support resolution',
-                'Sales teams',
-            ],
-        },
-    ],
-    col2: [
-        {
-            title: 'Our customers',
-            links: ['Customer stories'],
-        },
-        {
-            title: 'Resources',
-            links: ['Pricing', 'Blog', 'Marketplace', 'Documentation', 'API references'],
-        },
-        {
-            title: 'Company',
-            links: ['About us', 'Events', 'Careers', 'Contact us'],
-        },
-        {
-            title: 'Initiatives',
-            links: ['Partner Program', 'Startups Program', 'Gr.ai.ce'],
-        },
-    ],
-    legal: ['Security', 'SLA', 'DPA', 'Subprocessors', 'Cookie Policy', 'Privacy Policy', 'Terms of Service'],
-};
+// --- Custom SVG Icons to replace the removed Lucide Brand Icons ---
+const LinkedinIcon = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" />
+    </svg>
+);
 
-export const Footer = () => {
+const YoutubeIcon = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M2.5 7.1C2 8.6 2 12 2 12s0 3.4.5 4.9c.3 1.2 1.3 2.1 2.5 2.4C8 20 12 20 12 20s4 0 7-.6c1.2-.3 2.2-1.2 2.5-2.4.5-1.5.5-4.9.5-4.9s0-3.4-.5-4.9c-.3-1.2-1.3-2.1-2.5-2.4C16 4 12 4 12 4s-4 0-7 .6c-1.2.3-2.2 1.2-2.5 2.4z" /><path d="m10 15 5-3-5-3v6z" />
+    </svg>
+);
+
+const TwitterIcon = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+    </svg>
+);
+
+const InstagramIcon = ({ className }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+);
+// ------------------------------------------------------------------
+
+export function Footer({ logoUrl, linkGroups, newsletter, bottomBar }: any) {
     return (
-        <footer className="w-full bg-[#18181b] text-white pt-20 pb-12 px-6">
-            <div className="max-w-[85rem] mx-auto w-full">
+        <footer className="bg-[#151515] text-white pt-20 pb-8 w-full border-t border-gray-800">
+            <div className="max-w-[1440px] mx-auto px-6">
 
-                {/* TOP SECTION: 4-Column Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-6">
+                {/* TOP SECTION: 4 Columns Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
 
-                    {/* Column 1: Logo */}
-                    <div className="lg:col-span-3">
-                        <Link href="/" className="flex items-center gap-2">
-                            <Image
-                                src="/logos/logo.png"
-                                alt="DevRev Logo"
-                                width={150}
-                                height={40}
-                                priority
-                                className="object-contain"
-                            />
-                        </Link>
+                    {/* Col 1: Logo */}
+                    <div>
+                        {logoUrl ? (
+                            <div className="relative w-32 h-8">
+                                <Image src={logoUrl} alt="Logo" fill className="object-contain object-left" />
+                            </div>
+                        ) : (
+                            <div className="text-2xl font-bold tracking-tighter">DevRev</div>
+                        )}
                     </div>
 
-                    {/* Column 2: Computer & Apps & Use Cases */}
-                    <div className="lg:col-span-3 flex flex-col gap-8">
-                        {FOOTER_LINKS.col1.map((section) => (
-                            <div key={section.title}>
-                                <h4 className="text-[14px] font-semibold text-white mb-3">{section.title}</h4>
-                                <ul className="flex flex-col gap-2.5">
-                                    {section.links.map((link) => (
-                                        <li key={link}>
-                                            <Link href="#" className="text-[14px] text-gray-400 hover:text-white transition-colors">
-                                                {link}
+                    {/* Col 2 & Col 3: Link Groups mapped dynamically */}
+                    <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-12">
+                        {linkGroups?.map((group: any, index: number) => (
+                            <div key={index} className="flex flex-col gap-4">
+                                <h4 className="text-[15px] font-medium text-white">{group.heading}</h4>
+                                <ul className="flex flex-col gap-3">
+                                    {group.links?.map((link: any, i: number) => (
+                                        <li key={i}>
+                                            <Link href={link.url || '#'} className="text-[14px] text-gray-400 hover:text-white transition-colors">
+                                                {link.label}
                                             </Link>
                                         </li>
                                     ))}
@@ -85,132 +65,63 @@ export const Footer = () => {
                         ))}
                     </div>
 
-                    {/* Column 3: Customers, Resources, Company, Initiatives */}
-                    <div className="lg:col-span-3 flex flex-col gap-8">
-                        {FOOTER_LINKS.col2.map((section) => (
-                            <div key={section.title}>
-                                <h4 className="text-[14px] font-semibold text-white mb-3">{section.title}</h4>
-                                <ul className="flex flex-col gap-2.5">
-                                    {section.links.map((link) => (
-                                        <li key={link}>
-                                            <Link href="#" className="text-[14px] text-gray-400 hover:text-white transition-colors">
-                                                {link}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Column 4: Social, Newsletter, Legal */}
-                    <div className="lg:col-span-3 flex flex-col gap-8">
-
-                        {/* Social Icons */}
+                    {/* Col 4: Socials, Newsletter, Legal */}
+                    <div className="flex flex-col gap-10">
+                        {/* Socials */}
                         <div>
-                            <h4 className="text-[14px] font-semibold text-white mb-4">Follow Us</h4>
+                            <h4 className="text-[15px] font-medium text-white mb-4">Follow Us</h4>
                             <div className="flex items-center gap-4 text-gray-400">
-                                {/* LinkedIn */}
-                                <a href="#" className="hover:text-white transition-colors">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                    </svg>
-                                </a>
-                                {/* YouTube */}
-                                <a href="#" className="hover:text-white transition-colors">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                                    </svg>
-                                </a>
-                                {/* X / Twitter */}
-                                <a href="#" className="hover:text-white transition-colors">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                                    </svg>
-                                </a>
-                                {/* Instagram */}
-                                <a href="#" className="hover:text-white transition-colors">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                    </svg>
-                                </a>
+                                <a href="#" className="hover:text-white transition-colors"><LinkedinIcon className="w-5 h-5" /></a>
+                                <a href="#" className="hover:text-white transition-colors"><YoutubeIcon className="w-5 h-5" /></a>
+                                <a href="#" className="hover:text-white transition-colors"><TwitterIcon className="w-5 h-5" /></a>
+                                <a href="#" className="hover:text-white transition-colors"><InstagramIcon className="w-5 h-5" /></a>
                             </div>
                         </div>
 
                         {/* Newsletter */}
                         <div>
-                            <h4 className="text-[14px] font-semibold text-white mb-3">Newsletter</h4>
-                            <form className="relative w-full max-w-[18rem]" onSubmit={(e) => e.preventDefault()}>
+                            <h4 className="text-[15px] font-medium text-white mb-4">{newsletter?.heading || 'Newsletter'}</h4>
+                            <div className="flex items-center bg-[#1a1a1a] border border-gray-700 rounded-full p-1 focus-within:border-gray-500 transition-colors">
                                 <input
                                     type="email"
-                                    placeholder="Your email"
-                                    className="w-full bg-[#18181b] border border-[#333333] rounded-full py-2.5 pl-4 pr-[100px] text-[13px] text-white placeholder-gray-500 focus:outline-none focus:border-gray-400 transition-colors"
+                                    placeholder={newsletter?.placeholder || 'Your email'}
+                                    className="bg-transparent flex-1 pl-4 text-sm text-white outline-none placeholder:text-gray-500"
                                 />
-                                <button
-                                    type="submit"
-                                    className="absolute right-1 top-1 bottom-1 bg-white text-black text-[10px] font-bold tracking-widest uppercase px-4 rounded-full hover:bg-gray-200 transition-colors"
-                                >
-                                    Sign Up
+                                <button className="bg-white text-black text-[11px] font-bold tracking-widest uppercase px-6 py-2.5 rounded-full hover:bg-gray-200 transition-colors shrink-0">
+                                    {newsletter?.buttonText || 'SIGN UP'}
                                 </button>
-                            </form>
-                        </div>
-
-                        {/* Legal */}
-                        <div>
-                            <h4 className="text-[14px] font-semibold text-white mb-3">Legal</h4>
-                            <ul className="flex flex-col gap-2.5">
-                                {FOOTER_LINKS.legal.map((link) => (
-                                    <li key={link}>
-                                        <Link href="#" className="text-[14px] text-gray-400 hover:text-white transition-colors">
-                                            {link}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+                            </div>
                         </div>
                     </div>
-
                 </div>
 
-                {/* DIVIDER */}
-                <div className="w-full h-px bg-[#333333] my-10"></div>
+                {/* BOTTOM SECTION: Legal & Status */}
+                <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
 
-                {/* BOTTOM SECTION */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-6 items-start">
-
-                    {/* Empty Space to align with Logo column above */}
-                    <div className="hidden lg:block lg:col-span-3"></div>
-
-                    {/* Language */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-[14px] font-semibold text-white mb-1.5">Language</h4>
-                        <button className="flex items-center gap-1.5 text-[14px] text-gray-400 hover:text-white transition-colors">
-                            English
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
+                    {/* Language Selection */}
+                    <div className="flex flex-col gap-1">
+                        <span className="text-white font-medium">Language</span>
+                        <button className="flex items-center gap-1 hover:text-white transition-colors">
+                            {bottomBar?.language || 'English'} <ChevronDown className="w-4 h-4" />
                         </button>
                     </div>
 
                     {/* Status */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-[14px] font-semibold text-white mb-1.5">Status</h4>
-                        <div className="flex items-center gap-2 text-[14px] text-gray-400">
-                            <span className="w-2 h-2 rounded-full bg-[#34C759]"></span>
-                            All services online
+                    <div className="flex flex-col gap-1 md:items-center">
+                        <span className="text-white font-medium">Status</span>
+                        <div className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-green-500 shrink-0"></span>
+                            <span>{bottomBar?.statusText || 'All services online'}</span>
                         </div>
                     </div>
 
-                    {/* Certified Secure */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-[14px] font-semibold text-white">Certified Secure</h4>
+                    {/* Certification */}
+                    <div className="flex flex-col gap-1 md:items-end">
+                        <span className="text-white font-medium">Certified Secure</span>
                     </div>
 
                 </div>
-
             </div>
         </footer>
     );
-};
+}

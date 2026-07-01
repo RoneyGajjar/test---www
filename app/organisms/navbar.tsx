@@ -55,3 +55,80 @@
 //         </header>
 //     );
 // }
+
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { ChevronDown, User } from 'lucide-react';
+import { Button } from '../atoms/buttons';
+
+export function Navbar({ logoUrl, navItems, buttons }: any) {
+    return (
+        <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
+            <div className="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
+
+                {/* 1. LEFT SIDE: Logo + Nav Items grouped together */}
+                <div className="flex items-center gap-10">
+                    <Link href="/" className="relative w-32 h-8 shrink-0">
+                        {logoUrl ? (
+                            <Image src={logoUrl} alt="Logo" fill className="object-contain object-left" />
+                        ) : (
+                            <div className="text-2xl font-bold tracking-tighter">DevRev</div>
+                        )}
+                    </Link>
+
+                    <nav className="hidden lg:flex items-center gap-8">
+                        {navItems?.map((item: any, index: number) => {
+                            const hasDropdown = item.dropdownItems && item.dropdownItems.length > 0;
+                            const targetUrl = item.url || item.href;
+
+                            return (
+                                <div key={index} className="group cursor-pointer flex items-center gap-1 text-[15px] font-medium text-gray-800 hover:text-black transition-colors">
+                                    {targetUrl ? (
+                                        <Link href={targetUrl}>{item.label}</Link>
+                                    ) : (
+                                        <span>{item.label}</span>
+                                    )}
+                                    {hasDropdown && <ChevronDown className="w-4 h-4 text-gray-500 group-hover:text-black" />}
+                                </div>
+                            );
+                        })}
+                    </nav>
+                </div>
+
+                <div className="hidden md:flex items-center gap-3">
+                    {buttons?.map((btn: any, index: number) => {
+                        const targetUrl = btn.url || btn.href || '#';
+
+                        const variantMap: { [key: string]: string } = {
+                            'outline': 'outline',
+                            'Outline': 'outline',
+                            'black': 'dark',
+                            'Black': 'dark',
+                            'primary': 'primary'
+                        };
+                        const normalizedVariant = variantMap[btn.variant] || 'primary';
+                        if (btn.variant === 'icon' || btn.label?.toLowerCase() === 'icon') {
+                            return (
+                                <Link key={btn._key || index} href={targetUrl} className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors shrink-0">
+                                    <User className="w-5 h-5 text-gray-700" />
+                                </Link>
+                            );
+                        }
+                        return (
+                            <Button
+                                key={btn._key || index}
+                                href={targetUrl}
+                                variant={normalizedVariant as any}
+                                className="uppercase"
+                            >
+                                {btn.label}
+                            </Button>
+                        );
+                    })}
+                </div>
+
+            </div>
+        </header>
+    );
+}

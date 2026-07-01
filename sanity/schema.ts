@@ -8,6 +8,8 @@ import featuredBanner from './schemas/blocks/featuredBanner';
 import integrationDirectory from './schemas/blocks/integrationDirectory';
 import integrationCta from './schemas/blocks/integrationCTA';
 import logoStrip from './schemas/blocks/logoStrip';
+import navbar from './schemas/blocks/navbar';
+import footer from './schemas/blocks/footer';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -20,5 +22,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         integrationDirectory,
         integrationCta,
         logoStrip,
+        navbar,
+        footer,
     ],
 };

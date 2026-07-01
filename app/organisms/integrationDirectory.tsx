@@ -96,7 +96,7 @@ export function IntegrationDirectory({ heading, categories, sidebarGap, integrat
 
                                 <div className="flex flex-wrap gap-2 mt-4 w-full justify-start">
                                     {card.tags?.map((tag: string, i: number) => (
-                                        <div key={i} className="bg-gray-100 text-gray-600 text-[9px] font-extrabold px-4 py-2 rounded-full uppercase tracking-widest justify-center">
+                                        <div key={i} className="bg-gray-100 text-gray-600 text-[12px] font-medium px-4 py-2 rounded-full uppercase tracking-widest justify-center">
                                             {tag}
                                         </div>
                                     ))}

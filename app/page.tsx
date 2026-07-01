@@ -32,13 +32,31 @@
 
 import { client } from '../sanity/lib/client';
 import { PageBuilder } from '../app/templates/pageBuilder';
-
+import { Footer } from './organisms/footer';
+import { Navbar } from './organisms/navbar'; // Import Navbar
 
 const PAGE_QUERY = `
   *[_type == "page" && slug.current == "hompage"][0] {
     pageBuilder[] {
       ...,
       
+
+      _type == "navbar" => {
+        _key,
+        _type,
+        "logoUrl": logo.asset->url,
+        navItems[] {
+          label,
+          url,
+          dropdownItems[] { label, url }
+        },
+        buttons[] {
+          label,
+          url,
+          href,
+          variant
+        }
+      },
       // --- 1. HERO BLOCK ---
       _type == "hero" => {
         content[] {
@@ -109,23 +127,52 @@ const PAGE_QUERY = `
           bgClass,
           hasInnerShadow
         }
-      }
-      
+      },
     }
   }
 `;
+
+const FOOTER_QUERY = `
+  *[_type == "footer"][0] {
+    "logoUrl": logo.asset->url,
+    linkGroups[] {
+      heading,
+      links[] { label, url }
+    },
+    newsletter,
+    bottomBar
+  }
+`;
+
+
+// ... (PAGE_QUERY and FOOTER_QUERY remain the same) ...
+
 export default async function Home() {
-  const data = await client.fetch(PAGE_QUERY, {}, {
-    next: { tags: ['page'] } // This tag must match the one in your API route
-  });
+  const [data, footerData] = await Promise.all([
+    client.fetch(PAGE_QUERY, {}, { next: { tags: ['page'] } }),
+    client.fetch(FOOTER_QUERY, {}, { next: { tags: ['footer'] } })
+  ]);
+
   if (!data || !data.pageBuilder) {
     return <main className="p-24 text-center">No blocks found.</main>;
   }
+
+  // Find the navbar data specifically to render it outside the container
+  const navbarBlock = data.pageBuilder.find((b: any) => b._type === 'navbar');
+  const contentBlocks = data.pageBuilder.filter((b: any) => b._type !== 'navbar');
+
   return (
     <main className="min-h-screen">
+      {/* Navbar rendered flush at the top */}
+      {navbarBlock && <Navbar {...navbarBlock} />}
+
+      {/* Centered content container */}
       <div className="container mx-auto">
-        <PageBuilder blocks={data.pageBuilder} />
+        <PageBuilder blocks={contentBlocks} />
       </div>
+
+      {/* Footer rendered at the bottom */}
+      {footerData && <Footer {...footerData} />}
     </main>
   );
 }
