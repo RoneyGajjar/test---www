@@ -38,8 +38,8 @@ const PAGE_QUERY = `
     pageBuilder[] {
       ...,
       
+      // --- 1. HERO BLOCK ---
       _type == "hero" => {
-        // Map over the new content array
         content[] {
           ...,
           _type == "advancedText" => {
@@ -49,15 +49,50 @@ const PAGE_QUERY = `
             placeholder, maxWidth
           },
           _type == "buttonBlock" => {
-            _key,
-            label,
-            href,
-            variant,
-            size
+            _key, label, href, variant, size
           }
+        } // <-- Hero content ends here
+      },  // <-- Hero block ends here
+
+      // --- 2. FEATURED BANNER BLOCK --- (Now it is outside the Hero!)
+      _type == "featuredBanner" => {
+        backgroundColor,
+        "imageUrl": image.asset->url,
+        imageFit,
+        imageScale,
+        manualImageWidth,   
+        manualImageHeight,
+        leftColumnMargin { top, bottom, left, right },  
+        rightColumnMargin { top, bottom, left, right },
+        heading {
+           text, config { tag, type, textSize, width, color, textAlign, margin }
+        },
+        description {
+           text, config { tag, type, textSize, width, color, textAlign, margin }
+        }
+      },
+      _type == "integrationDirectory" => {
+        _key,
+        _type,
+        heading,
+        categories,
+        sidebarGap,
+        integrationCards[] {
+          // UPGRADED TO FETCH ADVANCED TEXT OBJECTS
+          title {
+            text,
+            config { tag, type, textSize, width, color, textAlign, margin }
+          },
+          description {
+            text,
+            config { tag, type, textSize, width, color, textAlign, margin }
+          },
+          "logoUrl": logo.asset->url,
+          tags
         }
       },
 
+      // --- 3. LOGO STRIP BLOCK ---
       _type == "logoStrip" => {
         ...,
         apps[]{

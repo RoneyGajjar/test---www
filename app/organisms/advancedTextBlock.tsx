@@ -11,7 +11,7 @@ type AdvancedTextProps = {
         width?: string;
         color?: string;
         textAlign?: string;
-        margin?: { top?: string; bottom?: string };
+        margin?: { top?: string; bottom?: string; left?: string; right?: string };
         animateText?: boolean;
         dynamicStyle?: boolean;
     };
@@ -36,7 +36,9 @@ export function AdvancedTextBlock({ text, config }: AdvancedTextProps) {
         'w-full flex px-6',
         flexAlign,
         config?.margin?.top,
-        config?.margin?.bottom
+        config?.margin?.bottom,
+        config?.margin?.left,
+        config?.margin?.right
     ].filter(Boolean).join(' ');
 
     // 3. Text Classes (Style: Width, Color, Alignment, Size)

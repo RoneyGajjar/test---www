@@ -4,6 +4,8 @@ import hero from './schemas/blocks/hero';
 import buttonBlock from './schemas/blocks/buttonBlock';
 import searchBarBlock from './schemas/blocks/searchBarBlock';
 import advancedText from './schemas/blocks/advancedText';
+import featuredBanner from './schemas/blocks/featuredBanner';
+import integrationDirectory from './schemas/blocks/integrationDirectory';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -12,5 +14,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         buttonBlock,
         searchBarBlock,
         advancedText,
+        featuredBanner,
+        integrationDirectory,
     ],
 };

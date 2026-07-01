@@ -1,10 +1,14 @@
 import React from 'react';
 import { Hero } from '../organisms/hero';
 import { AdvancedTextBlock } from '../organisms/advancedTextBlock';
+import { FeaturedBanner } from '../organisms/featuredBanner';
+import { IntegrationDirectory } from '../organisms/integrationDirectory';
 
 const blockComponents = {
     hero: Hero,
     advancedText: AdvancedTextBlock,
+    featuredBanner: FeaturedBanner,
+    integrationDirectory: IntegrationDirectory
 };
 
 type Block = { _key: string; _type: string;[key: string]: any };

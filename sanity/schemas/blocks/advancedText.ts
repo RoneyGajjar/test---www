@@ -60,7 +60,7 @@ export default defineType({
                             { title: 'Display H5', value: 'h5' },
                             { title: 'Standard Paragraph', value: 'p' },
                             { title: 'Body Text', value: 'body' },
-                            { title: 'Eyebrow / Label', value: 'label' },
+                            { title: 'Label', value: 'label' },
                             { title: 'Span Text', value: 'span' },
                         ],
                     },
@@ -130,7 +130,7 @@ export default defineType({
 
                 defineField({
                     name: 'margin',
-                    title: 'Margin (Top/Bottom)',
+                    title: 'Margin',
                     type: 'object',
                     fieldset: 'row2',
                     options: { columns: 2 },
@@ -146,6 +146,18 @@ export default defineType({
                             title: 'Bottom',
                             type: 'string',
                             options: { list: [{ title: '0', value: 'mb-0' }, { title: '4', value: 'mb-4' }, { title: '8', value: 'mb-8' }, { title: '12', value: 'mb-12' }, { title: '16', value: 'mb-16' }, { title: '24', value: 'mb-24' }, { title: '32', value: 'mb-32' }] },
+                        }),
+                        defineField({
+                            name: 'left',
+                            title: 'Left',
+                            type: 'string',
+                            options: { list: [{ title: '0', value: 'ml-0' }, { title: '4', value: 'ml-4' }, { title: '8', value: 'ml-8' }, { title: '12', value: 'ml-12' }, { title: '16', value: 'ml-16' }, { title: '24', value: 'ml-24' }, { title: '32', value: 'ml-32' }] },
+                        }),
+                        defineField({
+                            name: 'right',
+                            title: 'Right',
+                            type: 'string',
+                            options: { list: [{ title: '0', value: 'mr-0' }, { title: '4', value: 'mr-4' }, { title: '8', value: 'mr-8' }, { title: '12', value: 'mr-12' }, { title: '16', value: 'mr-16' }, { title: '24', value: 'mr-24' }, { title: '32', value: 'mr-32' }] },
                         }),
                     ],
                 }),

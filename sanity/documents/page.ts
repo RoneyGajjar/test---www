@@ -18,7 +18,9 @@ export default defineType({
             type: 'array',
             of: [
                 { type: 'hero' },
-                { type: 'advancedText' }
+                { type: 'advancedText' },
+                { type: 'featuredBanner' },
+                { type: 'integrationDirectory' }
             ],
         }),
     ],
