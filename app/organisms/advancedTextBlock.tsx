@@ -33,7 +33,7 @@ export function AdvancedTextBlock({ text, config }: AdvancedTextProps) {
 
     // 2. Wrapper Classes (Layout: Margins and Justification)
     const wrapperClasses = [
-        'w-full flex px-6',
+        'w-full flex',
         flexAlign,
         config?.margin?.top,
         config?.margin?.bottom,
@@ -51,15 +51,14 @@ export function AdvancedTextBlock({ text, config }: AdvancedTextProps) {
     ].filter(Boolean).join(' ');
 
     return (
-        <section className={wrapperClasses}>
-            <Typography
-                as={tag}
-                variant={variant}
-                className={textClasses}
-                data-animate={config?.animateText ? 'true' : undefined}
-            >
-                {text}
-            </Typography>
-        </section>
+
+        <Typography
+            as={tag}
+            variant={variant}
+            className={`${textClasses} ${wrapperClasses}`}
+            data-animate={config?.animateText ? 'true' : undefined}
+        >
+            {text}
+        </Typography>
     );
 }

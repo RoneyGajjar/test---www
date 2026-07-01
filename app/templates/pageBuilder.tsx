@@ -3,12 +3,14 @@ import { Hero } from '../organisms/hero';
 import { AdvancedTextBlock } from '../organisms/advancedTextBlock';
 import { FeaturedBanner } from '../organisms/featuredBanner';
 import { IntegrationDirectory } from '../organisms/integrationDirectory';
+import { IntegrationCTA } from '../organisms/integrationCTA';
 
 const blockComponents = {
     hero: Hero,
     advancedText: AdvancedTextBlock,
     featuredBanner: FeaturedBanner,
-    integrationDirectory: IntegrationDirectory
+    integrationDirectory: IntegrationDirectory,
+    integrationCTA: IntegrationCTA
 };
 
 type Block = { _key: string; _type: string;[key: string]: any };

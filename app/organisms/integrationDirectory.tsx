@@ -26,7 +26,7 @@ export function IntegrationDirectory({ heading, categories, sidebarGap, integrat
     const gapClass = sidebarGap || 'gap-4';
 
     return (
-        <section className="container mx-auto px-6 py-24">
+        <section className="container mx-auto px-6 py-6">
             <div className="flex justify-between items-end mb-16">
                 <h2 className="text-4xl font-bold tracking-tight">{heading || 'All'}</h2>
 
@@ -41,8 +41,7 @@ export function IntegrationDirectory({ heading, categories, sidebarGap, integrat
 
             <div className="flex flex-col lg:flex-row gap-16 items-start">
 
-                {/* LEFT COLUMN: Categories Sidebar */}
-                <aside className="w-full lg:w-64 shrink-0 sticky top-24">
+                <aside className="w-full lg:w-64">
                     <ul className={`flex flex-col ${gapClass} text-gray-600 font-medium`}>
                         <li>
                             <button className="text-black font-bold transition-colors text-left w-full">
@@ -59,16 +58,13 @@ export function IntegrationDirectory({ heading, categories, sidebarGap, integrat
                     </ul>
                 </aside>
 
-                {/* RIGHT COLUMN: Integration Cards Grid */}
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {integrationCards?.map((card, index) => (
                         <div
                             key={card._key || index}
-                            // Polished Card Container
-                            className="border border-gray-200 p-4 bg-white flex flex-col h-full"
+                            className="border border-gray-200 p-8 bg-white flex flex-col items-start h-full"
                         >
-                            {/* Polished Logo Container (matches design exactly) */}
-                            <div className="h-14 w-14 relative rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center p-2 border border-gray-100">
+                            <div className="h-14 w-14 relative mb-6 rounded-xl overflow-hidden bg-gray-50 flex items-center justify-center p-2 border border-gray-100 shrink-0">
                                 {card.logoUrl ? (
                                     <div className="relative w-full h-full">
                                         <Image
@@ -84,32 +80,33 @@ export function IntegrationDirectory({ heading, categories, sidebarGap, integrat
                                 )}
                             </div>
 
-                            {/* Card Text Content */}
-                            <div className="mb-4">
-                                {card.title?.text && (
-                                    <AdvancedTextBlock text={card.title.text} config={card.title.config} />
-                                )}
-                            </div>
+                            <div className="w-full flex-1 flex flex-col items-start justify-start">
 
-                            <div className="flex-1 mb-8">
-                                {card.description?.text && (
-                                    <AdvancedTextBlock text={card.description.text} config={card.description.config} />
-                                )}
-                            </div>
+                                <div className="w-full">
+                                    {card.title?.text && (
+                                        <AdvancedTextBlock text={card.title.text} config={card.title.config} />
+                                    )}
+                                </div>
 
-                            {/* Polished Card Tags (matches design exactly) */}
-                            <div className="flex flex-wrap gap-2 mt-auto">
-                                {card.tags?.map((tag, i) => (
-                                    <span
-                                        key={i}
-                                        className="bg-[#F3F4F6] text-[#4B5563] text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wide cursor-default"
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
+                                <div className="py-6 w-full">
+                                    {card.description?.text && (
+                                        <AdvancedTextBlock text={card.description.text} config={card.description.config} />
+                                    )}
+                                </div>
+
+                                <div className="flex flex-wrap gap-2 mt-4 w-full justify-start">
+                                    {card.tags?.map((tag: string, i: number) => (
+                                        <div key={i} className="bg-gray-100 text-gray-600 text-[9px] font-extrabold px-4 py-2 rounded-full uppercase tracking-widest justify-center">
+                                            {tag}
+                                        </div>
+                                    ))}
+                                </div>
+
                             </div>
                         </div>
                     ))}
+
+
                 </div>
             </div>
         </section>

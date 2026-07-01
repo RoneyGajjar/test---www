@@ -27,7 +27,8 @@
 //   );
 // }
 
-export const revalidate = 60; // Revalidates the cache every 60 seconds
+// export const revalidate = 60;
+// Revalidates the cache every 60 seconds
 
 import { client } from '../sanity/lib/client';
 import { PageBuilder } from '../app/templates/pageBuilder';
@@ -91,6 +92,14 @@ const PAGE_QUERY = `
           tags
         }
       },
+      _type == "integrationCTA" => {
+        _key,
+        _type,
+        title { text, config { tag, type, textSize, width, color, textAlign, margin } },
+        subtitle { text, config { tag, type, textSize, width, color, textAlign, margin } },
+        "iconUrl": icon.asset->url,
+        buttons[] { label, url, variant }
+      },
 
       // --- 3. LOGO STRIP BLOCK ---
       _type == "logoStrip" => {
@@ -105,21 +114,18 @@ const PAGE_QUERY = `
     }
   }
 `;
-
 export default async function Home() {
-  const data = await client.fetch(PAGE_QUERY);
-
+  const data = await client.fetch(PAGE_QUERY, {}, {
+    next: { tags: ['page'] } // This tag must match the one in your API route
+  });
   if (!data || !data.pageBuilder) {
-    return (
-      <main className="p-24 text-center">
-        No Page Builder blocks found. Please publish them in Sanity!
-      </main>
-    );
+    return <main className="p-24 text-center">No blocks found.</main>;
   }
-
   return (
     <main className="min-h-screen">
-      <PageBuilder blocks={data.pageBuilder} />
+      <div className="container mx-auto">
+        <PageBuilder blocks={data.pageBuilder} />
+      </div>
     </main>
   );
 }

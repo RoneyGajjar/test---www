@@ -6,6 +6,8 @@ import searchBarBlock from './schemas/blocks/searchBarBlock';
 import advancedText from './schemas/blocks/advancedText';
 import featuredBanner from './schemas/blocks/featuredBanner';
 import integrationDirectory from './schemas/blocks/integrationDirectory';
+import integrationCta from './schemas/blocks/integrationCTA';
+import logoStrip from './schemas/blocks/logoStrip';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -16,5 +18,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         advancedText,
         featuredBanner,
         integrationDirectory,
+        integrationCta,
+        logoStrip,
     ],
 };

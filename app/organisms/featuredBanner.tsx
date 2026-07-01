@@ -27,6 +27,8 @@ type FeaturedBannerProps = {
     imageUrl?: string;
     imageFit?: string;
     imageScale?: string;
+    manualImageWidth?: string;
+    manualImageHeight?: string;
     objectPosition?: string;
     backgroundColor?: string;
     leftColumnMargin?: SpacingConfig;
@@ -40,6 +42,8 @@ export function FeaturedBanner({
     backgroundColor,
     imageFit,
     imageScale,
+    manualImageWidth,
+    manualImageHeight,
     objectPosition,
     leftColumnMargin,
     rightColumnMargin,
@@ -48,6 +52,10 @@ export function FeaturedBanner({
     const fitClass = imageFit || 'object-cover';
     const scaleClass = imageScale || 'w-full h-full';
     const ObjectPositionClass = objectPosition || 'object-center';
+    const imageStyle = {
+        width: manualImageWidth || 'auto',
+        height: manualImageHeight || 'auto',
+    };
 
     const leftSpacing = [
         leftColumnMargin?.top,
@@ -75,13 +83,21 @@ export function FeaturedBanner({
                 </div>
                 <div className={`w-full md:w-1/2 relative min-h-[350px] flex items-center justify-center ${rightSpacing}`}>
                     {imageUrl ? (
-                        <div className={`relative ${scaleClass} min-h-[300px] transition-all duration-300`}>
+                        // <div className={`relative ${scaleClass} min-h-[300px] transition-all duration-300`}>
+                        //     <Image
+                        //         src={imageUrl}
+                        //         alt={heading?.text || 'Featured Graphic'}
+                        //         fill
+                        //         className={`${fitClass} ${ObjectPositionClass} drop-shadow-2xl`}
+                        //         sizes="(max-width: 768px) 100vw, 50vw"
+                        //     />
+                        // </div>
+                        <div style={imageStyle} className={`relative shrink-0 ${scaleClass}`}>
                             <Image
                                 src={imageUrl}
-                                alt={heading?.text || 'Featured Graphic'}
+                                alt="Banner Image"
                                 fill
-                                className={`${fitClass} ${ObjectPositionClass} drop-shadow-2xl`}
-                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className={`object-contain ${fitClass} ${ObjectPositionClass}`}
                             />
                         </div>
                     ) : (

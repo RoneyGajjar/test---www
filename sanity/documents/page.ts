@@ -20,7 +20,10 @@ export default defineType({
                 { type: 'hero' },
                 { type: 'advancedText' },
                 { type: 'featuredBanner' },
-                { type: 'integrationDirectory' }
+                { type: 'integrationDirectory' },
+                { type: 'integrationCTA' },
+                { type: 'logoStrip' },
+
             ],
         }),
     ],
