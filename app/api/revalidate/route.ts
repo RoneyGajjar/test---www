@@ -4,13 +4,11 @@ import { revalidateTag } from 'next/cache';
 export async function POST(req: NextRequest) {
     const secret = req.nextUrl.searchParams.get('secret');
 
-    // Security: Always use a secret token so only Sanity can trigger this
-    if (secret !== '39g9tayz') {
+    if (secret !== 'mySuperSecretLongStringForRevalidation123456789') {
         return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
     }
 
-    // This matches the 'tag' used in your data fetching
-    revalidateTag('page', 'cache');
-
+    (revalidateTag as any)('page');
+    (revalidateTag as any)('footer');
     return NextResponse.json({ revalidated: true, now: Date.now() });
 }

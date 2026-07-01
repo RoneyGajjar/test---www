@@ -146,6 +146,9 @@ const FOOTER_QUERY = `
 
 
 // ... (PAGE_QUERY and FOOTER_QUERY remain the same) ...
+const data = await client.fetch(PAGE_QUERY, {}, {
+  next: { tags: ['page'] }
+});
 
 export default async function Home() {
   const [data, footerData] = await Promise.all([
